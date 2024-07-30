@@ -30,19 +30,19 @@ new class extends Component
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 md:flex">
-                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('app')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Products') }}
                     </x-nav-link>
-                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('app')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Learn') }}
                     </x-nav-link>
-                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('app')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Safety') }}
                     </x-nav-link>
-                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('app')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Support') }}
                     </x-nav-link>
-                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link class="text-xl font-bold text-white hover:text-white/95" :href="route('app')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Download') }}
                     </x-nav-link>
                 </div>
