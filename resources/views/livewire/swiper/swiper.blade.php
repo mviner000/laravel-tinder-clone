@@ -1,5 +1,7 @@
 <div class="m-auto md:p-10 w-full h-full relative">
     <div class="relative h-full md:h-[600px] w-full md:w-96 m-auto">
+        @for ($i = 0; $i < 4; $i++)
+        
         <div 
             x-data="{
                 isSwiping: false,
@@ -7,11 +9,118 @@
                 swipingRight: false,
                 swipingUp: false
             }"
+
+            x-init="
+                element=$el;
+
+                {{-- initialize hammerjs --}}
+                var hammertime= new Hammer(element);
+
+                {{-- let pan support all directions --}}
+                hammertime.get('pan').set({
+                    direction: Hammer.DIRECTION_ALL,
+                    touchAction:'pan'
+                });
+
+                {{-- ON pan --}}
+                hammertime.on('pan',function(event){
+                    isSwiping=true;
+                    if(event.deltaX===0) return;
+                    if(event.center.x===0 && event.center.y===0) return;
+
+                    {{-- Swipe right checker --}}
+                    if(event.deltaX > 20){
+                        swipingRight=true;
+                        swipingLeft=false;
+                        swipingUp=false;
+                    }
+
+                    {{-- Swipe left checker --}}
+                    else if(event.deltaX < -20){
+                        swipingRight=false;
+                        swipingLeft=true;
+                        swipingUp=false;
+                    }
+
+                    {{-- Swipe Up checker --}}
+                    else if(event.deltaY < -50 && Math.abs(event.deltaX) < 20){
+                        swipingRight=false;
+                        swipingLeft=false;
+                        swipingUp=true;
+                    }
+
+                    {{-- Rotate --}}
+                    var rotate = event.deltaX/10;
+
+                    {{-- apply transformation --}}
+                    event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate('+rotate+ 'deg)';
+                });
+
+                hammertime.on('panend', function(event) {
+
+                {{-- reset states --}}
+                isSwiping = false;
+                swipingLeft = false;
+                swipingRight = false;
+                swipingUp = false;      
+                
+                {{-- set threshold --}}
+                var horizontalThreshold = 200;
+                var verticalThreshold = 200;
+
+                {{-- velocity threshold --}}
+                var velocityXThreshold = 0.5;
+                var velocityYThreshold = 0.5;
+
+                {{-- determine keep --}}
+                var keep = Math.abs(event.deltaX) < horizontalThreshold && Math.abs(event.velocityX) < velocityXThreshold &&
+                            Math.abs(event.deltaY) < verticalThreshold && Math.abs(event.velocityY) < velocityYThreshold;
+                
+                console.log('keep: ' + keep);
+                console.log('event.deltaX: ' + event.deltaX);
+
+                if(keep){
+                    {{-- adjust the duration and timing as needed --}}
+                    event.target.style.transition='transform 0.3s ease-in-out';
+                    event.target.style.transform='';
+                    $el.style.transform='';
+
+                    {{-- clear the transition --}}
+
+                    setTimeout(()=>{
+                        event.target.style.transition='';
+                        event.target.style.transform='';
+                        $el.style.transform='';
+                    },300); 
+                }
+                else {
+                    var moveOutWidth = document.body.clientWidth;
+                    var moveOutHeight = document.body.clientHeight;
+
+                    {{-- Decide to push left, right, or up --}}
+                    if (event.deltaX > 20) {
+                        event.target.style.transform = 'translate(' + moveOutWidth + 'px, 10px)';
+                        $dispatch('swipedRight');
+                    } else if (event.deltaX < -20) {
+                        event.target.style.transform = 'translate(' + -moveOutWidth + 'px, 10px)';
+                        $dispatch('swipedLeft');
+                    } else if (event.deltaY < -50 && Math.abs(event.deltaX) < 20) {
+                        event.target.style.transform = 'translate(0px, ' + -moveOutHeight + 'px)';
+                        $dispatch('swipedUp');
+                    }
+
+                    event.target.remove();
+                    $el.remove();
+                }
+            });
+
+            "
+
             :class="{'transform-none cursor-grab':isSwiping}"
-            class="absolute inset-0 m-auto transform ease-in-out duration-300 rounded-xl bg-gray-500 cursor-pointer z-50">
+            class="absolute inset-0 m-auto transform ease-in-out duration-300 rounded-xl cursor-pointer z-50">
             <div class="h-full w-full">
                 <div 
-                    style="background-image:  url('https://picsum.photos/500/500?random=woman')"
+                    style="background-image:  url('https://picsum.photos/500/500?random=woman-{{$i}}')"
                     class="relative overflow-hidden w-full h-full rounded-xl bg-cover">
 
                     {{-- swiper indicators --}}
@@ -139,5 +248,7 @@
                 </div>
             </div>
         </div>
+        
+        @endfor
     </div>
 </div>
