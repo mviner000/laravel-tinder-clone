@@ -14,7 +14,6 @@
                     style="background-image:  url('https://picsum.photos/500/500?random=woman')"
                     class="relative overflow-hidden w-full h-full rounded-xl bg-cover">
 
-
                     {{-- swiper indicators --}}
                     <div class="pointer-events-none">
                         <span 
@@ -36,6 +35,107 @@
                             SUPER LIKE
                         </span>
                     </div>
+
+                    {{-- information and actions --}}
+                    <section class="absolute inset-x-0 bottom-0 inset-y-1/2 py-2 bg-gradient-to-t from-black to-black/0 pointer-events-none">
+                        <div class="flex flex-col h-full gap-2 5 mt-auto p-5 text-white">
+                            {{-- personal details --}}
+                            <div class="grid grid-cols-12 items-center">
+                                <div class="col-span-10">
+                                    <h4 class="font-bold text-3xl">
+                                        {{fake()->name}}
+                                    </h4>
+                                    <p class="text-lg line-clamp-3">
+                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum, ipsum. Rerum eligendi earum dolor libero id odit commodi in cumque eaque, maxime eius ex quam totam eum magni doloribus asperiores!
+                                    </p>
+                                </div>
+
+                                <div class="col-span-2 justify-end flex pointer-events-auto">
+                                    <button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
+                                            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
+                                        </svg>                                      
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- actions --}}
+                            <div class="grid grid-cols-5 gap-1 items-center mt-auto">
+                                {{-- rewind --}}
+                                <div>
+                                    <button 
+                                        draggable="flase"
+                                        class="rounded-full border-2 pointer-events-none group border-yellow-600 p-3 shrink-0 max-w-fit flex items-center text-yellow-600"
+                                    >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="scale-95 size-9 shrink-0 m-auto group-hover:scale-105 transition-transform stroke-1 stroke-current">
+                                        <path fill-rule="evenodd" d="M9.53 2.47a.75.75 0 0 1 0 1.06L4.81 8.25H15a6.75 6.75 0 0 1 0 13.5h-3a.75.75 0 0 1 0-1.5h3a5.25 5.25 0 1 0 0-10.5H4.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+                                    </svg>
+                                      
+                                    </button>
+                                </div>
+
+                                {{-- swipe left --}}
+                                <div>
+                                    <button 
+                                        draggable="flase"
+                                        class="rounded-full border-2 pointer-events-none group border-red-600 p-3 shrink-0 max-w-fit flex items-center text-red-600"
+                                    >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                    stroke-width="4" stroke="currentColor"
+                                    class="scale-110 size-8 shrink-0 m-auto group-hover:scale-105 transition-transform">
+                                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                    </svg>                                      
+                                      
+                                    </button>
+                                </div>
+
+                                {{-- Super Like --}}
+                                <div>
+                                    <button 
+                                        draggable="flase"
+                                        class="rounded-full border-2 pointer-events-none group border-blue-600 p-3 shrink-0 max-w-fit flex items-center text-blue-600"
+                                    >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                    class="scale-110 size-8 shrink-0 m-auto group-hover:scale-105 transition-transform">
+                                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                                    </svg>           
+                                      
+                                    </button>
+                                </div>
+
+                                {{-- Heart --}}
+                                <div>
+                                    <button 
+                                        draggable="flase"
+                                        class="rounded-full border-2 pointer-events-none group border-green-600 p-3 shrink-0 max-w-fit flex items-center text-green-600"
+                                    >
+  
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                    class="scale-110 size-8 shrink-0 m-auto group-hover:scale-105 transition-transform">
+                                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                                    </svg>
+                                      
+                                    </button>
+                                </div>
+
+                                {{-- Bolt --}}
+                                <div>
+                                    <button 
+                                        draggable="flase"
+                                        class="rounded-full border-2 pointer-events-none group border-purple-600 p-3 shrink-0 max-w-fit flex items-center text-purple-600"
+                                    >
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
+                                    class="scale-95 size-9 shrink-0 m-auto group-hover:scale-105 transition-transform">
+                                        <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" />
+                                    </svg>
+                                      
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
