@@ -45,7 +45,7 @@
 
                 {{-- Tabs section --}}
                 <section 
-                    x-data="{ tab:'1' }"
+                    x-data="{ tab:'2' }"
                     class="mb-auto relative no-scrollbar overflow-y-scroll">
                     <header class="flex items-center gap-5 mb-2 p-4 sticky top-0 bg-white z-10">
                         <button 
@@ -97,8 +97,40 @@
                         </aside>
 
                         {{-- messages --}}
-                        <aside x-show="tab=='2'">
-                            2
+                        <aside x-cloak x-show="tab=='2'">
+                            <ul>
+                                @for ($i = 0; $i < 7; $i++)
+                                    
+                                <li>
+                                    <a href="#"
+                                        @class(['flex gap-4 items-center p-2', 'border-r-4 border-red-400 bg-white py-3'=>$i==3?true:false])
+                                    >
+                                        <div class="relative">
+                                            <span class="inset-y-0 my-auto absolute -right-7">
+                                                <svg
+                                                    @class([
+                                                        'w-14 h-14 stroke-[0.4px] stroke-white',
+                                                        'hidden'=>$i==3?false:true,
+                                                        'text-red-500'=>true,
+                                                    ])
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                                </svg>
+                                            </span>
+
+                                            <x-avatar class="size-14" src="https://picsum.photos/200/200?random=woman-{{$i}}"/>
+
+                                        </div>
+
+                                        <div class="overflow-hidden">
+                                            <h6 class="font-bold truncate"> {{fake()->name}}</h6>
+                                            <p class="text-gray-600 truncate"> {{fake()->text}}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                @endfor
+                            </ul>
                         </aside>
                     </main>
                 </section>
