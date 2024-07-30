@@ -2,12 +2,50 @@
     <div class="relative h-full md:h-[600px] w-full md:w-96 m-auto">
         @for ($i = 0; $i < 4; $i++)
         
-        <div 
+        <div
+            @swipedright.window="console.log('right')"
+            @swipedleft.window="console.log('left')"
+            @swipedup.window="console.log('up')"
             x-data="{
                 isSwiping: false,
                 swipingLeft: false,
                 swipingRight: false,
-                swipingUp: false
+                swipingUp: false,
+                swipeRight: function() {
+                    moveOutWidth = document.body.clientWidth * 1.5;
+                    $el.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+
+                    setTimeout(() => {
+                        $el.remove();
+                    }, 300);
+
+                    // dispatch
+                    $dispatch('swipedright');
+
+                    
+                },
+                swipeLeft: function() {
+                    moveOutWidth = document.body.clientWidth * 1.5;
+                    $el.style.transform = 'translate(' + -moveOutWidth + 'px, -100px) rotate(-30deg)';
+
+                    setTimeout(() => {
+                        $el.remove();
+                    }, 300);
+
+                    // dispatch
+                    $dispatch('swipedleft');
+                },
+                swipeUp: function() {
+                    moveOutWidth = document.body.clientWidth * 1.5;
+                    $el.style.transform = 'translate(0px, '+ -moveOutWidth + 'px) rotate(-20deg)';
+
+                    setTimeout(() => {
+                        $el.remove();
+                    }, 300);
+
+                    // dispatch
+                    $dispatch('swipedup');
+                },
             }"
 
             x-init="
@@ -100,13 +138,13 @@
                     {{-- Decide to push left, right, or up --}}
                     if (event.deltaX > 20) {
                         event.target.style.transform = 'translate(' + moveOutWidth + 'px, 10px)';
-                        $dispatch('swipedRight');
+                        $dispatch('swipedright');
                     } else if (event.deltaX < -20) {
                         event.target.style.transform = 'translate(' + -moveOutWidth + 'px, 10px)';
-                        $dispatch('swipedLeft');
+                        $dispatch('swipedleft');
                     } else if (event.deltaY < -50 && Math.abs(event.deltaX) < 20) {
                         event.target.style.transform = 'translate(0px, ' + -moveOutHeight + 'px)';
-                        $dispatch('swipedUp');
+                        $dispatch('swipedup');
                     }
 
                     event.target.remove();
@@ -146,7 +184,7 @@
                     </div>
 
                     {{-- information and actions --}}
-                    <section class="absolute inset-x-0 bottom-0 inset-y-1/2 py-2 bg-gradient-to-t from-black to-black/0 pointer-events-none">
+                    <section class="absolute inset-x-0 bottom-0 inset-y-1/2 py-2 bg-gradient-to-t from-black to-black/0 ">
                         <div class="flex flex-col h-full gap-2 5 mt-auto p-5 text-white">
                             {{-- personal details --}}
                             <div class="grid grid-cols-12 items-center">
@@ -173,8 +211,10 @@
                                 {{-- rewind --}}
                                 <div>
                                     <button 
-                                        draggable="flase"
-                                        class="rounded-full border-2 pointer-events-none group border-yellow-600 p-3 shrink-0 max-w-fit flex items-center text-yellow-600"
+                                    
+                                    
+                                        draggable="false"
+                                        class="rounded-full border-2 group border-yellow-600 p-3 shrink-0 max-w-fit flex items-center text-yellow-600"
                                     >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="scale-95 size-9 shrink-0 m-auto group-hover:scale-105 transition-transform stroke-1 stroke-current">
@@ -187,8 +227,9 @@
                                 {{-- swipe left --}}
                                 <div>
                                     <button 
-                                        draggable="flase"
-                                        class="rounded-full border-2 pointer-events-none group border-red-600 p-3 shrink-0 max-w-fit flex items-center text-red-600"
+                                        @click="swipeLeft()"
+                                        draggable="false"
+                                        class="rounded-full border-2 group border-red-600 p-3 shrink-0 max-w-fit flex items-center text-red-600"
                                     >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
                                     stroke-width="4" stroke="currentColor"
@@ -202,8 +243,9 @@
                                 {{-- Super Like --}}
                                 <div>
                                     <button 
-                                        draggable="flase"
-                                        class="rounded-full border-2 pointer-events-none group border-blue-600 p-3 shrink-0 max-w-fit flex items-center text-blue-600"
+                                        @click="swipeUp()"
+                                        draggable="false"
+                                        class="rounded-full border-2 group border-blue-600 p-3 shrink-0 max-w-fit flex items-center text-blue-600"
                                     >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
                                     class="scale-110 size-8 shrink-0 m-auto group-hover:scale-105 transition-transform">
@@ -215,9 +257,10 @@
 
                                 {{-- Heart --}}
                                 <div>
-                                    <button 
-                                        draggable="flase"
-                                        class="rounded-full border-2 pointer-events-none group border-green-600 p-3 shrink-0 max-w-fit flex items-center text-green-600"
+                                    <button
+                                        draggable="false"
+                                        @click="swipeRight()"
+                                        class="rounded-full border-2 group border-green-600 p-3 shrink-0 max-w-fit flex items-center text-green-600"
                                     >
   
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
@@ -231,8 +274,8 @@
                                 {{-- Bolt --}}
                                 <div>
                                     <button 
-                                        draggable="flase"
-                                        class="rounded-full border-2 pointer-events-none group border-purple-600 p-3 shrink-0 max-w-fit flex items-center text-purple-600"
+                                        draggable="false"
+                                        class="rounded-full border-2 group border-purple-600 p-3 shrink-0 max-w-fit flex items-center text-purple-600"
                                     >
 
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
